@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 
   resources :events
   resources :users, only: [:show]
+  resources :event_attendees, only: %i[update destroy]
 end

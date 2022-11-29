@@ -1,4 +1,4 @@
-<h1>Created events:</h1>
+<h2>Created events:</h1>
 <% if @user.created_events.any? %>
   <ul>
     <% @user.created_events.each do |event| %>
@@ -7,4 +7,14 @@
   </ul>
 <% else %>
   <p>No events created</p>
+<% end %>
+<h2>Attended events:</h1>
+<% if @user.attended_events.any? %>
+  <ul>
+    <% @user.attended_events.each do |event| %>
+      <li><%= "#{event.name} - #{event.date}" %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No events attending</p>
 <% end %>
