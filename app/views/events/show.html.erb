@@ -5,10 +5,18 @@
   <h3>Attendees:</h3>
   <ul>
     <% @event.attendees.each do |attendee| %>
-      <li><%= attendee.email %> - <%= link_to "Show User", user_url(attendee) %> - <%= link_to "Remove", event_attendee_url(@event, user_id: attendee.id), data: {turbo_method: :delete} %></li>
+      <li><%= attendee.email %> - <%= link_to "Show User", user_url(attendee) %>
+        <% if current_user == attendee || current_user == @event.creator %>
+          - <%= link_to "Remove", event_attendee_url(@event, user_id: attendee.id), data: {turbo_method: :delete} %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% end %>
-<%= link_to "Attend Event", event_attendee_url(event_id: @event.id), data: { turbo_method: :patch } %>
-<%= link_to "Edit Event", edit_event_url(@event) %>
-<%= link_to "Delete Event", event_url(@event), data: { turbo_method: :delete } %>
+<% if user_signed_in? && @event.attendees.exclude?(current_user) %>
+  <%= link_to "Attend Event", event_attendee_url(event_id: @event.id), data: { turbo_method: :patch } %>
+<% end%>
+<% if current_user == @event.creator %>
+  <%= link_to "Edit Event", edit_event_url(@event) %>
+  <%= link_to "Delete Event", event_url(@event), data: { turbo_method: :delete } %>
+<% end%>
