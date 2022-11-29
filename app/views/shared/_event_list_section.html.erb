@@ -1,0 +1,10 @@
+<h2><%= section_title %></h2>
+<% if section_events.any? %>
+  <ul>
+    <% section_events.each do |event| %>
+      <li><%= link_to "#{event.name} - #{event.date}", event_url(event) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No events</p>
+<% end %>

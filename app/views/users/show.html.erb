@@ -1,30 +1,3 @@
-<h2>Created events:</h1>
-<% if @user.created_events.any? %>
-  <ul>
-    <% @user.created_events.each do |event| %>
-      <li><%= "#{event.name} - #{event.date}" %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No events created</p>
-<% end %>
-<h2>Attending events:</h1>
-<% if @user.attended_events.future.any? %>
-  <ul>
-    <% @user.attended_events.future.each do |event| %>
-      <li><%= "#{event.name} - #{event.date}" %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No events attending</p>
-<% end %>
-<h2>Attended events:</h1>
-<% if @user.attended_events.past.any? %>
-  <ul>
-    <% @user.attended_events.past.each do |event| %>
-      <li><%= "#{event.name} - #{event.date}" %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No events attended</p>
-<% end %>
+<%= render "shared/event_list_section", section_title: "Created Events", section_events: @user.created_events %>
+<%= render "shared/event_list_section", section_title: "Upcoming Events", section_events: @user.attended_events.future %>
+<%= render "shared/event_list_section", section_title: "Past Events", section_events: @user.attended_events.past %>
