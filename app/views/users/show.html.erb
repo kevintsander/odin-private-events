@@ -8,13 +8,23 @@
 <% else %>
   <p>No events created</p>
 <% end %>
-<h2>Attended events:</h1>
-<% if @user.attended_events.any? %>
+<h2>Attending events:</h1>
+<% if @user.attended_events.future.any? %>
   <ul>
-    <% @user.attended_events.each do |event| %>
+    <% @user.attended_events.future.each do |event| %>
       <li><%= "#{event.name} - #{event.date}" %></li>
     <% end %>
   </ul>
 <% else %>
   <p>No events attending</p>
+<% end %>
+<h2>Attended events:</h1>
+<% if @user.attended_events.past.any? %>
+  <ul>
+    <% @user.attended_events.past.each do |event| %>
+      <li><%= "#{event.name} - #{event.date}" %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No events attended</p>
 <% end %>

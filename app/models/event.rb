@@ -3,4 +3,7 @@ class Event < ApplicationRecord
 
   has_many :event_attendees
   has_many :attendees, through: :event_attendees, source: :user
+
+  scope :past, -> { where(date: ..Date.today) }
+  scope :future, -> { where(date: Date.today..) }
 end
