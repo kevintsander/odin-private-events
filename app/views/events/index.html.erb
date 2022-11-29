@@ -1,9 +1,10 @@
 <h1>Welcome to Private Events</h1>
+<%= link_to 'New Event', new_event_path %>
 <% if @events.any? %>
   <h2>Existing Events:</h1>
   <ul>
     <% @events.each do |event| %>
-      <li><%= `#{event.id} - #{event.date}` %></li>
+      <li><%= link_to "#{event.name} - #{event.date}", event_path(event) %></li>
     <% end %>
   </ul>
 <% else %>
