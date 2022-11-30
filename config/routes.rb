@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root 'events#index'
 
   resources :events do
-    resources :event_attendees, only: %i[create update destroy]
+    resources :event_bookings, only: %i[create update destroy]
   end
   resources :users, only: [:show]
 end
