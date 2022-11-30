@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   root 'events#index'
 
-  resources :events do
-    resources :event_bookings, only: %i[create update destroy]
-  end
+  resources :events
+  resources :event_bookings, only: %i[new create update destroy]
   resources :users, only: [:show]
 end

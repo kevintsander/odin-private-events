@@ -20,7 +20,9 @@ class EventsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @invite_booking = @event.event_bookings.build
+  end
 
   def edit; end
 
