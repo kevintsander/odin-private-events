@@ -1,3 +1,3 @@
 <%= render "shared/event_list_section", section_title: "Created Events", section_events: @user.created_events %>
-<%= render "shared/event_list_section", section_title: "Upcoming Events", section_events: @user.attended_events.future %>
+<%= render "shared/event_list_section", section_title: "Upcoming Events", section_events: @user.attended_events.future, removable: true, section_user: @user %>
 <%= render "shared/event_list_section", section_title: "Past Events", section_events: @user.attended_events.past %>

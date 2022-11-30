@@ -1,8 +1,13 @@
+<% removable = false if local_assigns[:removable].nil? %>
+
 <h2><%= section_title %></h2>
 <% if section_events.any? %>
   <ul>
     <% section_events.each do |event| %>
-      <li><%= link_to "#{event.name} - #{event.date}", event_url(event) %></li>
+      <li><%= link_to "#{event.name} - #{event.date}", event_url(event) %>
+        <% if removable && (current_user == section_user || current_user == event.creator) %>
+          - <%= link_to "Remove", event_attendee_path(event, user_id: current_user.id), data: {turbo_method: :delete} %>
+        <% end %></li>
     <% end %>
   </ul>
 <% else %>
