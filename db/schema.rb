@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_29_033826) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_30_022652) do
   create_table "event_attendees", id: false, force: :cascade do |t|
     t.integer "event_id", null: false
     t.integer "user_id", null: false
+    t.string "status"
     t.index ["user_id", "event_id"], name: "index_event_attendees_on_user_id_and_event_id"
   end
 
@@ -24,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_033826) do
     t.integer "creator_id", null: false
     t.string "name"
     t.string "description"
+    t.boolean "invite_only?"
     t.index ["creator_id"], name: "index_events_on_creator_id"
   end
 

@@ -2,20 +2,20 @@
 <p>Created by: <%= @event.creator.email %></p>
 <p>Date: <%= @event.date %></p>
 <p><%= @event.description %></p>
-<% if @event.attendees.any? %>
+<% if @event.event_attendees.attending_users.any? %>
   <h3>Attendees:</h3>
   <ul>
-    <% @event.attendees.each do |attendee| %>
-      <li><%= attendee.email %> - <%= link_to "Show User", user_url(attendee) %>
-        <% if current_user == attendee || current_user == @event.creator %>
-          - <%= link_to "Remove", event_attendee_url(@event, user_id: attendee.id), data: {turbo_method: :delete} %>
+    <% @event.event_attendees.attending_users.each do |event_attendee| %>
+      <li><%= event_attendee.user.email %> - <%= link_to "Show User", user_url(event_attendee.user) %>
+        <% if current_user == event_attendee.user || current_user == @event.creator %>
+          - <%= link_to "Remove", event_event_attendee_url(event_id: @event.id, id: event_attendee.user.id), data: {turbo_method: :delete} %>
         <% end %>
       </li>
     <% end %>
   </ul>
 <% end %>
-<% if user_signed_in? && @event.attendees.exclude?(current_user) %>
-  <%= link_to "Attend Event", event_attendee_url(event_id: @event.id), data: { turbo_method: :patch } %>
+<% if user_signed_in? && @event.event_attendees.attending_users.none? { |attending_user| attending_user.user == current_user } %>
+  <%= link_to "Attend Event", event_event_attendee_url(event_id: @event.id, id: current_user.id, event_attendee: { status: 'Attending'} ), data: { turbo_method: :patch } %>
 <% end%>
 <% if current_user == @event.creator %>
   <%= link_to "Edit Event", edit_event_url(@event) %>

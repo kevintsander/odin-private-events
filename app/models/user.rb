@@ -1,7 +1,12 @@
 class User < ApplicationRecord
   has_many :created_events, foreign_key: 'creator_id', class_name: 'Event'
-  has_many :event_attendees
-  has_many :attended_events, through: :event_attendees, source: :event
+  has_many :linked_events, foreign_key: 'event_id', class_name: 'EventAttendee'
+
+  # has_many :event_attendees
+  # has_many :attended_events, through: :event_attendees, source: :event
+
+  has_many :attending_event_attendees, -> { where(status: 'Attending') }, class_name: 'EventAttendee'
+  has_many :attending_events, through: :attending_event_attendees, source: :event
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
