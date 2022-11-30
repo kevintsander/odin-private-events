@@ -1,0 +1,15 @@
+<%= form_with model: event do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <br>
+  <%= form.label :description %>
+  <%= form.text_area :description, size:"80x4"%>
+  <br>
+  <%= form.label :date %>
+  <%= form.date_field :date %>
+  <br>
+  <%= form.label :invite_only %>
+  <%= form.check_box :invite_only %>
+  <br>
+  <%= form.submit %>
+<% end %>

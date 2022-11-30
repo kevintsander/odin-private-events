@@ -2,6 +2,7 @@
 <p>Created by: <%= @event.creator.email %></p>
 <p>Date: <%= @event.date %></p>
 <p><%= @event.description %></p>
+<p><%= label_tag :invite_only %><%= check_box_tag :invite_only, 'test', @event.invite_only, disabled: true %></p>
 <% if @event.event_attendees.attending_users.any? %>
   <h3>Attendees:</h3>
   <ul>

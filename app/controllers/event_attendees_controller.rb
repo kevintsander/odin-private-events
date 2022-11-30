@@ -7,7 +7,7 @@ class EventAttendeesController < ApplicationController
 
     if event_attendee.status == status
       flash.alert = `Already #{status.downcase}!`
-      redirect_to event_path(event)
+      redirect_back fallback_location: event_path(params[:event_id])
     end
 
     event_attendee.status = status
@@ -16,7 +16,7 @@ class EventAttendeesController < ApplicationController
     else
       flash.alert = 'Uh oh!'
     end
-    redirect_to event_path(event)
+    redirect_back fallback_location: event_path(params[:event_id])
   end
 
   def destroy
@@ -24,7 +24,7 @@ class EventAttendeesController < ApplicationController
     event.event_attendees.delete_by(user_id: params[:id])
 
     flash.notice = 'Removed attendee'
-    redirect_to event_path(params[:event_id])
+    redirect_back fallback_location: event_path(params[:event_id])
   end
 
   private
