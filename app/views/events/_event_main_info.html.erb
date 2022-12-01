@@ -1,0 +1,6 @@
+<h2><%= event.name %></h2>
+<p>Location: <%= event.location %></p>
+<p>Date: <%= event.date %></p>
+<p>Description: <%= event.description %></p>
+<p><%= label_tag :invite_only %><%= check_box_tag :invite_only, 'invite_only', @event.invite_only, disabled: true %></p>
+<p>Created by: <%= event.creator.email %></p>

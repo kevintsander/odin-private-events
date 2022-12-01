@@ -1,8 +1,4 @@
-<h2><%= @event.name %></h2>
-<p>Created by: <%= @event.creator.email %></p>
-<p>Date: <%= @event.date %></p>
-<p><%= @event.description %></p>
-<p><%= label_tag :invite_only %><%= check_box_tag :invite_only, 'invite_only', @event.invite_only, disabled: true %></p>
+<%= render "event_main_info", event: @event %>
 <% if @event.event_bookings.invited_users.any? %>
   <h3>Invited Users:</h3>
   <ul>
@@ -30,7 +26,7 @@
 <% if @event.creator == current_user %>
   <h3>Invite User:</h3>
   <%= form_with model: @event.event_bookings.build do |form| %>
-    <%= form.collection_select :user_id, User.all, :id, :email, prompt: true %>
+    <%= form.collection_select :user_id, @event.unbooked_users, :id, :email, prompt: true %>
     <%= form.hidden_field :event_id, value: @event.id %>
     <%= form.hidden_field :status, value: 'Invited' %>
     <%= form.submit 'Invite user' %>

@@ -6,7 +6,7 @@
     <% section_events.each do |event| %>
       <li><%= link_to "#{event.name} - #{event.date}", event_url(event) %>
         <% if removable && (current_user == section_user || current_user == event.creator) %>
-          - <%= link_to "Remove", event_event_booking_path(event_id: event.id, id: current_user.id), data: {turbo_method: :delete} %>
+          - <%= link_to "Remove", event_booking_path(id: EventBooking.find_by(event_id: event.id, user_id: section_user.Invited)), data: {turbo_method: :delete} %>
         <% end %></li>
     <% end %>
   </ul>

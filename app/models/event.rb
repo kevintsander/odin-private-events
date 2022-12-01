@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: 'User'
 
   has_many :event_bookings
+  has_many :booked_users, through: :event_bookings, source: :user
 
   scope :past, -> { where(date: ..Date.today) }
   scope :future, -> { where(date: Date.today..) }
@@ -16,5 +17,9 @@ class Event < ApplicationRecord
     return true if user == creator
 
     false
+  end
+
+  def unbooked_users
+    User.where.not(id: booked_users)
   end
 end
