@@ -1,0 +1,10 @@
+<div class="event-card">
+  <h3><%= event.name %></h3>
+  <% if event.location %>
+    <div class="event-card-location">
+      <%= image_tag "placeholder.png", size: '16x16' %><%= event.location %>
+    </div>
+  <% end %>
+  <%= event.date.strftime('%m/%d/%Y') %>
+  <%= link_to "View", event_path(event), class: 'link-button'  %>
+</div>

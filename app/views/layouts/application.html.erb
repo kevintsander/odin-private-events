@@ -11,10 +11,11 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= link_to "Events", root_path %>
-    <%= render "layouts/user_nav" %>
-    <%= yield %>
+    <%= render "layouts/header" %>
+    <main>
+      <%= yield %>
+    </main>
+    <%= render "layouts/footer" %>
   </body>
+
 </html>

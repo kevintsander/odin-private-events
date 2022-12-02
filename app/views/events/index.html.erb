@@ -1,12 +1,10 @@
-<h1>Welcome to Private Events</h1>
-<%= link_to 'New Event', new_event_path %>
+<%= link_to 'New Event', new_event_path, class: 'link-button' %>
 <% if @events.any? %>
-  <h2>Existing Events:</h1>
-  <ul>
+  <div class="event-cards">
     <% @events.each do |event| %>
-      <li><%= link_to "#{event.name} - #{event.date}", event_path(event) %></li>
+      <%= render "event_card", event: event %>
     <% end %>
-  </ul>
+  </div>
 <% else %>
   <h2>No events scheduled!</h2>
 <% end %>

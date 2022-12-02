@@ -32,10 +32,12 @@
     <%= form.submit 'Invite user' %>
   <% end %>
 <% end %>
-<% if user_signed_in? && @event.user_can_attend?(current_user) %>
-  <%= link_to "Attend Event", event_bookings_path(event_booking: { event_id: @event.id, user_id: current_user.id, status: 'Attending'} ), data: { turbo_method: :post } %>
-<% end%>
-<% if current_user == @event.creator %>
-  <%= link_to "Edit Event", edit_event_url(@event) %>
-  <%= link_to "Delete Event", event_url(@event), data: { turbo_method: :delete } %>
-<% end%>
+<div class="event-action-links">
+  <% if user_signed_in? && @event.user_can_attend?(current_user) %>
+    <%= link_to "Attend Event", event_bookings_path(event_booking: { event_id: @event.id, user_id: current_user.id, status: 'Attending'} ), data: { turbo_method: :post }, class: 'link-button' %>
+  <% end%>
+  <% if current_user == @event.creator %>
+    <%= link_to "Edit Event", edit_event_url(@event), class: 'link-button' %>
+    <%= link_to "Delete Event", event_url(@event), data: { turbo_method: :delete }, class: 'link-button' %>
+  <% end%>
+</div>
